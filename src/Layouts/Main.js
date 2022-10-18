@@ -1,7 +1,10 @@
 import React from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import { Outlet } from "react-router-dom";
-import Header from "../components/Header/Header";
+import Footer from "../components/Shared/Footer/Footer";
+import Header from "../components/Shared/Header/Header";
+import LeftNav from "../components/Shared/LeftNav/LeftNav";
+import RightNav from "../components/Shared/RightNav/RightNav";
 
 const Main = () => {
   return (
@@ -9,17 +12,18 @@ const Main = () => {
       <Header />
       <Container>
         <Row>
-          <Col>
-            <h2>right nav</h2>
+          <Col lg="2">
+            <LeftNav />
           </Col>
-          <Col>
+          <Col lg="7">
             <Outlet />
           </Col>
-          <Col>
-            <h2>Left nav</h2>
+          <Col lg="3">
+            <RightNav />
           </Col>
         </Row>
       </Container>
+      <Footer />
     </div>
   );
 };
