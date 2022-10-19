@@ -12,6 +12,7 @@ import {
   FaRegStickyNote,
   FaRegListAlt,
 } from "react-icons/fa";
+import BrandCarousel from "../BrandCarousel/BrandCarousel";
 
 const RightNav = () => {
   return (
@@ -49,6 +50,9 @@ const RightNav = () => {
             <FaRegListAlt /> Terms & Conditions
           </ListGroup.Item>
         </ListGroup>
+      </div>
+      <div className="mt-3">
+        <BrandCarousel />
       </div>
     </div>
   );
