@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import { useContext } from "react";
 import { NavDropdown } from "react-bootstrap";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
@@ -9,7 +9,16 @@ import LeftNav from "../LeftNav/LeftNav";
 import "./Header.css";
 
 const Header = () => {
-  const { user } = useContext(AuthContext);
+  const { user, signOutUser } = useContext(AuthContext);
+
+  const handleSignOut = () => {
+    signOutUser()
+      .then(() => {})
+      .catch((error) => {
+        console.error(error);
+      });
+  };
+
   return (
     <Navbar
       className="mb-4 header"
@@ -19,23 +28,26 @@ const Header = () => {
       variant="light"
     >
       <Container>
-        <Navbar.Brand href="#home">News Portal</Navbar.Brand>
+        <Navbar.Brand>News Portal</Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="me-auto">
-            <Nav.Link href="#features">All News</Nav.Link>
-            <Nav.Link href="#pricing">Dank Memes</Nav.Link>
+            <Nav.Link>
+              <Link to="/home">All News</Link>
+            </Nav.Link>
+            <Nav.Link>
+              <Link to="/news">Dank Memes</Link>
+            </Nav.Link>
           </Nav>
           <Nav>
-            {user.displayName ? (
-              <NavDropdown
-                title={user.displayName}
-                id="navbarScrollingDropdown"
-              >
-                <NavDropdown.Item href="#action3">Profile</NavDropdown.Item>
-                <NavDropdown.Item href="#action4">Settings</NavDropdown.Item>
+            {user && user.email ? (
+              <NavDropdown title={user.email} id="navbarScrollingDropdown">
+                <NavDropdown.Item>Profile</NavDropdown.Item>
+                <NavDropdown.Item>Settings</NavDropdown.Item>
                 <NavDropdown.Divider />
-                <NavDropdown.Item href="#action5">Logout</NavDropdown.Item>
+                <NavDropdown.Item onClick={handleSignOut}>
+                  Logout
+                </NavDropdown.Item>
               </NavDropdown>
             ) : (
               <>
@@ -48,6 +60,7 @@ const Header = () => {
               </>
             )}
           </Nav>
+
           <div className="d-lg-none">
             <LeftNav />
           </div>

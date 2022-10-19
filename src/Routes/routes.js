@@ -5,6 +5,7 @@ import News from "../components/News/News";
 import Register from "../components/Register/Register";
 import SignIn from "../components/SignIn/SignIn";
 import Main from "../Layouts/Main";
+import PrivateRoute from "./PrivateRoute";
 
 export const routes = createBrowserRouter([
   {
@@ -12,8 +13,12 @@ export const routes = createBrowserRouter([
     element: <Main />,
     children: [
       {
-        path: "/",
-        element: <Home />,
+        path: "/home",
+        element: (
+          <PrivateRoute>
+            <Home />
+          </PrivateRoute>
+        ),
       },
       {
         path: "/category/:id",
