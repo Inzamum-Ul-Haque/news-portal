@@ -19,14 +19,23 @@ export const routes = createBrowserRouter([
             <Home />
           </PrivateRoute>
         ),
+        loader: () => {
+          return fetch("http://localhost:5000/news");
+        },
       },
       {
         path: "/category/:id",
+        loader: ({ params }) => {
+          return fetch(`http://localhost:5000/category/${params.id}`);
+        },
         element: <Category />,
       },
       {
         path: "/news/:id",
         element: <News />,
+        loader: ({ params }) => {
+          return fetch(`http://localhost:5000/news/${params.id}`);
+        },
       },
       {
         path: "/login",

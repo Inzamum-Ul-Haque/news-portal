@@ -28,7 +28,9 @@ const Header = () => {
       variant="light"
     >
       <Container>
-        <Navbar.Brand>News Portal</Navbar.Brand>
+        <Navbar.Brand>
+          <Link to="/home">News Portal</Link>
+        </Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="me-auto">

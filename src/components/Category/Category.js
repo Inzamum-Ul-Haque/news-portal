@@ -1,7 +1,10 @@
 import React from "react";
+import { useLoaderData } from "react-router-dom";
 
 const Category = () => {
-  return <div>this is category page</div>;
+  const data = useLoaderData();
+  console.log(data);
+  return <div>This category has {data.length} news</div>;
 };
 
 export default Category;
