@@ -7,6 +7,7 @@ import {
   signInWithEmailAndPassword,
   signInWithPopup,
   signOut,
+  updateProfile,
 } from "firebase/auth";
 
 export const AuthContext = createContext();
@@ -21,16 +22,22 @@ const UserContext = ({ children }) => {
   };
 
   const signInUser = (email, password) => {
-    // এই loading টা না দিলে login করার পর form reset হয়ে যাবে কিন্তু login page থেকে home এ navigate করবে না
+    // এই loading টা না দিলে login করার পর form reset হয়ে যাবে কিন্তু login page থেকে home এ navigate করবে না অর্থাৎ এখানে user কে পাচ্ছে না, null হয়ে থাকতেসে।
     setLoading(true);
     return signInWithEmailAndPassword(auth, email, password);
   };
 
   const providerLogin = (provider) => {
+    setLoading(true);
     return signInWithPopup(auth, provider);
   };
 
+  const updateUserProfile = (profile) => {
+    return updateProfile(auth.currentUser, profile);
+  };
+
   const signOutUser = () => {
+    setLoading(true);
     return signOut(auth);
   };
 
@@ -50,6 +57,7 @@ const UserContext = ({ children }) => {
     signOutUser,
     loading,
     providerLogin,
+    updateUserProfile,
   };
   return (
     <AuthContext.Provider value={authInfo}>{children}</AuthContext.Provider>

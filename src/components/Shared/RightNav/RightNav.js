@@ -48,7 +48,7 @@ const RightNav = () => {
           </Button>
         </ButtonGroup>
       )}
-      <div className="mt-4">
+      <div className={user?.uid ? "mt-0" : "mt-4"}>
         <h5>Find us on</h5>
         <ListGroup>
           <ListGroup.Item className="mb-2">

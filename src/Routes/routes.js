@@ -2,6 +2,7 @@ import { createBrowserRouter } from "react-router-dom";
 import Category from "../components/Category/Category";
 import Home from "../components/Home/Home";
 import News from "../components/News/News";
+import TermsAndConditions from "../components/Others/TermsAndConditions";
 import Register from "../components/Register/Register";
 import SignIn from "../components/SignIn/SignIn";
 import Main from "../Layouts/Main";
@@ -44,6 +45,10 @@ export const routes = createBrowserRouter([
       {
         path: "/register",
         element: <Register />,
+      },
+      {
+        path: "/terms",
+        element: <TermsAndConditions />,
       },
     ],
   },

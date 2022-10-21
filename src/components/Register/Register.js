@@ -1,11 +1,12 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { Button, Col, Form, Row } from "react-bootstrap";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../Contexts/UserContext";
 
 const Register = () => {
-  const { createUser } = useContext(AuthContext);
+  const { createUser, updateUserProfile } = useContext(AuthContext);
   const navigate = useNavigate();
+  const [accepted, setAccepted] = useState(false);
 
   const handleCreateUser = (event) => {
     event.preventDefault();
@@ -17,11 +18,23 @@ const Register = () => {
       .then((result) => {
         console.log(result.user);
         form.reset();
+        // handleUpdateUserProfile();
         navigate("/home");
       })
       .catch((error) => {
         console.error(error);
       });
+  };
+
+  const handleUpdateUserProfile = () => {
+    const profile = {};
+    updateUserProfile(profile)
+      .then(() => {})
+      .catch((error) => console.error(error));
+  };
+
+  const handleAccepted = (event) => {
+    setAccepted(event.target.checked);
   };
 
   return (
@@ -55,13 +68,22 @@ const Register = () => {
 
         <Form.Group as={Row} className="mb-3" controlId="formHorizontalCheck">
           <Col sm={{ span: 10, offset: 2 }}>
-            <Form.Check label="Remember me" />
+            <Form.Check
+              onClick={handleAccepted}
+              label={
+                <>
+                  Accept <Link to="/terms">Terms and Conditions</Link>
+                </>
+              }
+            />
           </Col>
         </Form.Group>
 
         <Form.Group as={Row} className="mb-3">
           <Col sm={{ span: 10, offset: 2 }}>
-            <Button type="submit">Register</Button>
+            <Button type="submit" disabled={!accepted}>
+              Register
+            </Button>
           </Col>
         </Form.Group>
       </Form>
