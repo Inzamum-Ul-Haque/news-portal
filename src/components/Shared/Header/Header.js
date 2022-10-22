@@ -11,7 +11,6 @@ import { FaUserCircle } from "react-icons/fa";
 
 const Header = () => {
   const { user, signOutUser } = useContext(AuthContext);
-  console.log(user);
 
   const handleSignOut = () => {
     signOutUser()

@@ -48,7 +48,10 @@ const UserContext = ({ children }) => {
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-      setUser(currentUser);
+      // এখানে current user null হলেও ভিতরে ঢুকতে দিতে হবে নাহলে logout করতে পারবে না।
+      if (currentUser === null || currentUser.emailVerified) {
+        setUser(currentUser);
+      }
       setLoading(false);
     });
 
@@ -61,6 +64,7 @@ const UserContext = ({ children }) => {
     createUser,
     signOutUser,
     loading,
+    setLoading,
     providerLogin,
     updateUserProfile,
     verifyEmail,

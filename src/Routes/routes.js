@@ -21,13 +21,15 @@ export const routes = createBrowserRouter([
           </PrivateRoute>
         ),
         loader: () => {
-          return fetch("http://localhost:5000/news");
+          return fetch("https://news-portal-server-rose.vercel.app/news");
         },
       },
       {
         path: "/category/:id",
         loader: ({ params }) => {
-          return fetch(`http://localhost:5000/category/${params.id}`);
+          return fetch(
+            `https://news-portal-server-rose.vercel.app/category/${params.id}`
+          );
         },
         element: <Category />,
       },
@@ -35,7 +37,9 @@ export const routes = createBrowserRouter([
         path: "/news/:id",
         element: <News />,
         loader: ({ params }) => {
-          return fetch(`http://localhost:5000/news/${params.id}`);
+          return fetch(
+            `https://news-portal-server-rose.vercel.app/news/${params.id}`
+          );
         },
       },
       {

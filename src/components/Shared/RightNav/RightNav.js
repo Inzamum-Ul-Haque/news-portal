@@ -15,15 +15,18 @@ import {
 import BrandCarousel from "../BrandCarousel/BrandCarousel";
 import { AuthContext } from "../../../Contexts/UserContext";
 import { GoogleAuthProvider } from "firebase/auth";
+import { useNavigate } from "react-router-dom";
 
 const RightNav = () => {
   const { user, providerLogin } = useContext(AuthContext);
   const googleProvider = new GoogleAuthProvider();
+  const navigate = useNavigate();
 
   const handleGoogleSignIn = () => {
     providerLogin(googleProvider)
       .then((result) => {
         console.log(result.user);
+        navigate("/home");
       })
       .catch((error) => {
         console.error(error);

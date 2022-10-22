@@ -4,7 +4,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../Contexts/UserContext";
 
 const SignIn = () => {
-  const { signInUser } = useContext(AuthContext);
+  const { signInUser, setLoading } = useContext(AuthContext);
   const navigate = useNavigate();
   const location = useLocation();
   // যদি কোন কারনে আমরা state set না করি অর্থাৎ কোথাও user কে redirect করলাম না, সে এমনিই login এ click করলো, তখন আমরা state এর value কে যদি না পাই, এজন্য optional chaining use করা হয়েছে।
@@ -27,6 +27,9 @@ const SignIn = () => {
       })
       .catch((error) => {
         console.error(error);
+      })
+      .finally(() => {
+        setLoading(false);
       });
   };
 
