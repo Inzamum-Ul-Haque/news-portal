@@ -18,9 +18,12 @@ const SignIn = () => {
 
     signInUser(email, password)
       .then((result) => {
-        console.log(result.user);
         form.reset();
-        navigate(from, { replace: true });
+        if (result.user.emailVerified) {
+          navigate(from, { replace: true });
+        } else {
+          alert("Your email is not verified!");
+        }
       })
       .catch((error) => {
         console.error(error);

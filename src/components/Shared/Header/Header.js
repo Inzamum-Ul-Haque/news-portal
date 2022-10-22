@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { NavDropdown } from "react-bootstrap";
+import { Image, NavDropdown } from "react-bootstrap";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
@@ -7,9 +7,11 @@ import { Link } from "react-router-dom";
 import { AuthContext } from "../../../Contexts/UserContext";
 import LeftNav from "../LeftNav/LeftNav";
 import "./Header.css";
+import { FaUserCircle } from "react-icons/fa";
 
 const Header = () => {
   const { user, signOutUser } = useContext(AuthContext);
+  console.log(user);
 
   const handleSignOut = () => {
     signOutUser()
@@ -43,7 +45,20 @@ const Header = () => {
           </Nav>
           <Nav>
             {user && user.email ? (
-              <NavDropdown title={user.email} id="navbarScrollingDropdown">
+              <NavDropdown
+                title={
+                  user.photoURL ? (
+                    <Image
+                      roundedCircle
+                      src={user.photoURL}
+                      style={{ width: "30px", height: "30px" }}
+                    />
+                  ) : (
+                    <FaUserCircle style={{ width: "30px", height: "30px" }} />
+                  )
+                }
+                id="navbarScrollingDropdown"
+              >
                 <NavDropdown.Item>Profile</NavDropdown.Item>
                 <NavDropdown.Item>Settings</NavDropdown.Item>
                 <NavDropdown.Divider />

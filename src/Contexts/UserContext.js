@@ -4,6 +4,7 @@ import {
   createUserWithEmailAndPassword,
   getAuth,
   onAuthStateChanged,
+  sendEmailVerification,
   signInWithEmailAndPassword,
   signInWithPopup,
   signOut,
@@ -36,6 +37,10 @@ const UserContext = ({ children }) => {
     return updateProfile(auth.currentUser, profile);
   };
 
+  const verifyEmail = () => {
+    return sendEmailVerification(auth.currentUser);
+  };
+
   const signOutUser = () => {
     setLoading(true);
     return signOut(auth);
@@ -58,6 +63,7 @@ const UserContext = ({ children }) => {
     loading,
     providerLogin,
     updateUserProfile,
+    verifyEmail,
   };
   return (
     <AuthContext.Provider value={authInfo}>{children}</AuthContext.Provider>
